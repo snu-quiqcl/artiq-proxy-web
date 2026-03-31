@@ -1,0 +1,5 @@
+[MASTER]
+load-plugins=pylint_django
+django-settings-module=artiq_proxy_web.settings
+ignore=manage.py, migrations
+disable=missing-module-docstring, missing-class-docstring, missing-function-docstring
