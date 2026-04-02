@@ -10,10 +10,16 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR.parent / ".env")
+load_dotenv(BASE_DIR / ".env", override=True)
 
 
 # Quick-start development settings - unsuitable for production
@@ -41,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'users.apps.UsersConfig',
+    'artiq_client.apps.ArtiqClientConfig',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +141,7 @@ REST_FRAMEWORK = {
 
 # Cross-origin requests: allow any origin (convenient for dev; tighten for production).
 CORS_ALLOW_ALL_ORIGINS = True
+
+# ARTIQ master RPC (sipyco.pc_rpc.Client); overridable via .env
+ARTIQ_MASTER_HOST = os.environ.get("ARTIQ_MASTER_HOST", "::1")
+ARTIQ_MASTER_PORT = int(os.environ.get("ARTIQ_MASTER_PORT", "3251"))

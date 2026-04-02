@@ -3,3 +3,6 @@ djangorestframework==3.17.*
 django-cors-headers==4.9.*
 pylint==4.0.*
 pylint-django==2.7.*
+python-dotenv==1.2.*
+git+https://github.com/m-labs/artiq.git@7.0
+git+https://github.com/m-labs/sipyco.git@v1.6
