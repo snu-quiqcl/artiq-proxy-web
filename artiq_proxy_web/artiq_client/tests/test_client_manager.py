@@ -6,6 +6,7 @@ from artiq_client.client_manager import (
     ArtiqRpcClientManager,
     reset_rpc_manager,
 )
+from artiq_client.rpc import get_artiq_rpc_client
 
 
 class ArtiqRpcClientManagerTests(TestCase):
@@ -46,8 +47,6 @@ class GetArtiqRpcClientTests(TestCase):
     @patch("artiq_client.client_manager.rpc.Client")
     def test_get_artiq_rpc_client_uses_settings(self, mock_client_class: MagicMock) -> None:
         mock_client_class.return_value = MagicMock()
-        from artiq_client.rpc import get_artiq_rpc_client
-
         get_artiq_rpc_client("master_schedule")
         mock_client_class.assert_called_once_with(
             "10.0.0.1", 9999, "master_schedule"
@@ -58,8 +57,6 @@ class GetArtiqRpcClientTests(TestCase):
         self, mock_client_class: MagicMock
     ) -> None:
         mock_client_class.return_value = MagicMock()
-        from artiq_client.rpc import get_artiq_rpc_client
-
         get_artiq_rpc_client("x")
         get_artiq_rpc_client("x")
         self.assertEqual(mock_client_class.call_count, 1)

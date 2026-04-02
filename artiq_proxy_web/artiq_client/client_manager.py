@@ -7,8 +7,8 @@ import threading
 from django.conf import settings
 from sipyco import pc_rpc as rpc
 
-_manager: ArtiqRpcClientManager | None = None
-_manager_lock = threading.Lock()
+_manager: ArtiqRpcClientManager | None = None  # pylint: disable=invalid-name
+_manager_lock = threading.Lock()  # pylint: disable=invalid-name
 
 
 class ArtiqRpcClientManager:
