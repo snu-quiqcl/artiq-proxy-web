@@ -21,4 +21,7 @@ jobs:
         pip install -r requirements.txt
     - name: Run Pylint
       working-directory: artiq_proxy_web
+      env:
+        ARTIQ_MASTER_PORT: "3251"
+        ARTIQ_MASTER_PATH: /path/to/artiq
       run: pylint . --report=y
