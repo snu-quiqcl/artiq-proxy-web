@@ -142,6 +142,7 @@ REST_FRAMEWORK = {
 # Cross-origin requests: allow any origin (convenient for dev; tighten for production).
 CORS_ALLOW_ALL_ORIGINS = True
 
-# ARTIQ master RPC (sipyco.pc_rpc.Client); overridable via .env
-ARTIQ_MASTER_HOST = os.environ.get("ARTIQ_MASTER_HOST", "::1")
-ARTIQ_MASTER_PORT = int(os.environ.get("ARTIQ_MASTER_PORT", "3251"))
+# ARTIQ master: set ARTIQ_MASTER_PORT and ARTIQ_MASTER_PATH in the environment (no defaults).
+ARTIQ_MASTER_HOST = "::1"
+ARTIQ_MASTER_PORT = int(os.environ["ARTIQ_MASTER_PORT"])
+ARTIQ_MASTER_PATH = os.environ["ARTIQ_MASTER_PATH"].strip()
