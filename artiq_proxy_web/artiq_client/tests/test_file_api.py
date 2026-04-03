@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import shutil
 import tempfile
 from pathlib import Path
 
@@ -29,9 +30,8 @@ class FileApiUnconfiguredTests(TestCase):
 
 class FileApiTests(TestCase):
     def setUp(self) -> None:
-        self._tmp = tempfile.TemporaryDirectory()
-        self.addCleanup(self._tmp.cleanup)
-        master = Path(self._tmp.name)
+        master = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, master, ignore_errors=True)
         repo = master / "repository"
         repo.mkdir(parents=True)
         (repo / "hello.py").write_text("print('hi')\n", encoding="utf-8")
